@@ -7,7 +7,7 @@
 ##################################################
 ```
 
-That's why Documentation Boxes are super useful. If you truly want your magnum opus of a project to stand out, do away with plain ol' commenting, and [try generating a documentation box](https://robo-mop.github.io/DocumentationBox/). It's quick, easy and free to use.
+That's why Documentation Boxes are super useful. If you truly want your magnum opus of a project to stand out, do away with plain ol' commenting, and [try generating a documentation box](https://documentation-box.netlify.app). It's quick, easy and free to use.
 
 ```
 //////////////////////////////////////////////////
