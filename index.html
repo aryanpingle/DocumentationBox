@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Box</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="index.css">
+
+    <!-- JS -->
+    <script src="index.js" async defer></script>
+</head>
+<body>
+    <div id="page">
+        <div id="input-container">
+            <div id="text-bubble" class="bubble">
+                <div class="bubble-inner">
+                    <h1>Text:</h1>
+                    <div id="textarea-container">
+                        <textarea id="text-input" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div id="length-bubble" class="bubble">
+                <div class="bubble-inner">
+                    <h1>Line Length:</h1>
+                    <input id="length-input" type="text" minlength="1", maxlength="3" value="50">
+                </div>
+            </div>
+            <div id="ending-bubble" class="bubble">
+                <div class="bubble-inner">
+                    <h1>Outline:</h1>
+                    <input id="ending-input" type="text" minlength="0", maxlength="3" value="#">
+                </div>
+            </div>
+            <div id="padding-bubble" class="bubble">
+                <div class="bubble-inner">
+                    <h1>Padding:</h1>
+                    <input id="padding-input" type="text" minlength="0", maxlength="3" value="! ">
+                </div>
+            </div>
+        </div>
+        <div id="result-container">
+            <div id="result"></div>
+            <button id="copy-button" onclick="this.classList.add('copied'); copy();">
+                <h6>Copied!</h6><img src="images/copy.png" alt="">
+            </button>
+        </div>
+    </div>
+</body>
+</html>
