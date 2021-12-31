@@ -5,7 +5,7 @@ const sort = (iter, key=e=>e) => iter.map(e => e).sort((a, b) => key(a) - key(b)
 const min = (iter, key=e=>e) => sort(iter, key).at(0)
 const max = (iter, key=e=>e) => sort(iter, key).at(-1)
 
-var TEXT = "Sample Text Written Here", LINE_LENGTH = 50, ENDING = "#", PADDING = ":"
+var TEXT = "", LINE_LENGTH = 50, ENDING = "#", PADDING = ":"
 var OUTPUT = ""
 
 window.onload = setup
