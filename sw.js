@@ -1,5 +1,5 @@
 const print = (...message) => DEBUG?console.log(...message):0
-const VERSION_NUMBER = 1.20
+const VERSION_NUMBER = 1.30
 const CACHE_NAME = `v${VERSION_NUMBER.toFixed(2)}`
 const CACHE_FILES = ["/", "/index.html", "/index.css", "/index.js", "/images/copy.png", "/images/logo.png"]
 var DEBUG = true
@@ -32,5 +32,5 @@ async function get_request(request_event) {
     let request = request_event.request
     let url = request_event.request
 
-    return fetch(request).catch(err => caches.open(CACHE_NAME).then(cache=>cache.match(request)))
+    return fetch(request).catch(err => caches.match(request, {cacheName: CACHE_NAME}))
 }
