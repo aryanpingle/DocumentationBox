@@ -66,6 +66,7 @@ function get_documentation() {
     let LARGEST_WORD = max(TEXT.map(line=>max(line.split(/\s+/g), len)), len)
     let MIN_LENGTH = 2*len(ENDING) + 2*len(PADDING) + len(LARGEST_WORD)
     LINE_LENGTH = Math.max(LINE_LENGTH, MIN_LENGTH)
+    if(!LINE_LENGTH) LINE_LENGTH = MIN_LENGTH
 
     let effective_length = LINE_LENGTH - 2*len(ENDING) - 2*len(PADDING)
     let running_length = 0

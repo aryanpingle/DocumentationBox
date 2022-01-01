@@ -1,5 +1,5 @@
 const print = message => DEBUG?console.log(message):0
-const VERSION_NUMBER = 1.00
+const VERSION_NUMBER = 1.10
 const CACHE_NAME = `v${VERSION_NUMBER.toFixed(2)}`
 const CACHE_FILES = ["/", "/index.html", "/index.css", "/index.js", "/images/copy.png", "/images/logo.png"]
 var DEBUG = true
