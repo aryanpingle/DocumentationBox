@@ -1,18 +1,17 @@
-const print = message => DEBUG?console.log(message):0
-const VERSION_NUMBER = 1.10
+const print = (...message) => DEBUG?console.log(...message):0
+const VERSION_NUMBER = 1.20
 const CACHE_NAME = `v${VERSION_NUMBER.toFixed(2)}`
 const CACHE_FILES = ["/", "/index.html", "/index.css", "/index.js", "/images/copy.png", "/images/logo.png"]
 var DEBUG = true
-var CURRENT_CACHE = null
 
 // Don't forget to run the python file to add to cache
 
 self.addEventListener("install", async event => {
     print("Service Worker Installed")
     // Initialize CURRENT_CACHE
-    CURRENT_CACHE = await caches.open(CACHE_NAME)
+    let cache = await caches.open(CACHE_NAME)
     // Add files to cache
-    CURRENT_CACHE.addAll(CACHE_FILES).then(self.skipWaiting())
+    cache.addAll(CACHE_FILES).then(self.skipWaiting())
 })
 
 self.addEventListener("activate", async event => {
@@ -33,5 +32,5 @@ async function get_request(request_event) {
     let request = request_event.request
     let url = request_event.request
 
-    return fetch(request).catch(err => CURRENT_CACHE.match(request))
+    return fetch(request).catch(err => caches.open(CACHE_NAME).then(cache=>cache.match(request)))
 }
