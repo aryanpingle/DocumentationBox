@@ -201,6 +201,7 @@ textarea {
 
 #result * {
     transition: background-color 250ms ease;
+    white-space: nowrap;
 }
 
 #result:hover * {
