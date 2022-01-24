@@ -41,21 +41,46 @@ function generate_documentation_box() {
     document.getElementById("result").innerHTML = process_output(OUTPUT).replace(/\n/g, "").replace(/ /g, "&nbsp;")
 }
 
+/**
+ * Take in the plain text documentation box, and adds the necessary tags to each token i.e. for ending, padding, text etc
+ * Returns the final html
+ */
+
 function process_output(output) {
     output = output.split("\n")
     let final_output = []
     final_output.push(`<div><e>${output.at(0)}</e></div>`)
     for(let i = 1; i < output.length - 1; ++i) {
         let line = ""
-        line += `<e>${ENDING}</e>`
-        line += `<pd>${PADDING}</pd>`
+        line += `<e>${sanitize(ENDING)}</e>`
+        line += `<pd>${sanitize(PADDING)}</pd>`
         line += `<t>${output[i].substr(len(ENDING)+len(PADDING), LINE_LENGTH - 2*(len(ENDING)+len(PADDING)))}</t>`
-        line += `<pd>${Array.from(PADDING).reverse().join("")}</pd>`
-        line += `<e>${ENDING}</e>`
+        line += `<pd>${sanitize(reverse(PADDING))}</pd>`
+        line += `<e>${sanitize(reverse(ENDING))}</e>`
         final_output.push(`<div>${line}</div>`)
     }
     final_output.push(`<div><e>${output.at(-1)}</e></div>`)
     return final_output.join("\n")
+}
+
+function reverse(str) {
+    let reversed = ""
+    let r = {
+        "[": "]",
+        "]": "[",
+        "(": ")",
+        ")": "(",
+        "<": ">",
+        ">": "<"
+    }
+
+    let char = ''
+    for(let i = 0; i < str.length; ++i) {
+        char = str.charAt(i)
+        if (char in r) char = r[char]
+        reversed = char + reversed
+    }
+    return reversed
 }
 
 function get_documentation() {
@@ -88,16 +113,21 @@ function get_documentation() {
         final.push(...lines)
     }
     final = final.map(line => line.join(" "))
+    // Add the first line with only ENDING's
     let output = [Array(LINE_LENGTH).fill(ENDING).join("")]
     for(let line of final) {
         let right_spaces = int(effective_length / 2) - int(len(line) / 2)
-        output.push(ENDING + PADDING + Array(effective_length - right_spaces - len(line)).fill(" ").join("") + line + Array(right_spaces).fill(" ").join("") + Array.from(PADDING).reverse().join("") + ENDING)
+        output.push(ENDING + PADDING + Array(effective_length - right_spaces - len(line)).fill(" ").join("") + line + Array(right_spaces).fill(" ").join("") + reverse(PADDING) + reverse(ENDING))
     }
-    "".s
+    // Add the last line with only ENDINGs
     output.push(Array(LINE_LENGTH).fill(ENDING).join(""))
 
     output = output.join("\n")
     return output
+}
+
+function sanitize(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
 function copy() {
